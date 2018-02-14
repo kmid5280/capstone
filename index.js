@@ -63,9 +63,9 @@ function watchForSubmit() {
 function renderContentBoxes() {
   $('main').html('');
   $('main').html(`
-    <div id="youtube-results" class="results col-12">youtube results</div>
-    <div id="wiki-results" class="results col-6">wiki results</div>
-    <div id="state-results" class="results col-6">state results here</div>
+    <div id="youtube-results" class="results col-12"></div>
+    <div id="wiki-results" class="results col-6"></div>
+    <div id="state-results" class="results col-6"></div>
     `)
 }
 
@@ -94,7 +94,10 @@ function renderWikiData(data) {
 }
 
 function renderStateData(data) {
-  $('#state-results').html('state results here');
+  const searchResult = data.country_fact_sheets;
+  $('#state-results').append(`
+  <p>${searchResult.title}</p>
+  `);
   
   
 }
