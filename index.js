@@ -15,7 +15,7 @@ function renderForm() {
 function getDataForYoutube(searchTerm, callback) {
   const query = {
     part: 'snippet',
-    key: '',
+    key: 'AIzaSyCN2YnjWyuLox9NPFs4XxhdncA6dIbgGEE',
     q: `${searchTerm} in:name`,
   }
   $.getJSON(youtube_API_URL, query, callback);
@@ -53,9 +53,9 @@ function watchForSubmit() {
     event.preventDefault();
     const searchQuery = $('#form-query').val();
     renderContentBoxes();
-    //getDataForYoutube(searchQuery, returnResults)
-    getDataForWiki(searchQuery, returnResults) 
-    //getDataForState(searchQuery, returnResults)
+    getDataForYoutube(searchQuery, renderYoutubeData)
+    getDataForWiki(searchQuery, renderWikiData) 
+    getDataForState(searchQuery, renderStateData)
     $('#form-query').val('');
   })
 }
@@ -71,21 +71,16 @@ function renderContentBoxes() {
 
 
 function renderYoutubeData(data) {
-  $('#youtube-results').html('youtube results here');
-  /*$('.youtube-results').html(`
-  <p>Total results: ${data.pageInfo.totalResults}</p>
-  `)
-  for (i=0; i<data.items.length; i++) {
+  for (i=0; i<=4; i++) {
     const titleResult = data.items[i];
-    $('.youtube-results').append(`
+    $('#youtube-results').append(`
     <p class="videotitle">${titleResult.snippet.title}</p>
     <a href="https://www.youtube.com/watch?v=${titleResult.id.videoId}"><img src="${titleResult.snippet.thumbnails.medium.url}" alt="Thumbnail for search result ${i}"></a>
     `)
-  } */
+  } 
 }
 
 function renderWikiData(data) {
-  $('#wiki-results').html('wiki results here');
   const titleResult = data.query.pages[0];
   $('#wiki-results').append(`
     <p>${titleResult.title}</p>
@@ -94,9 +89,9 @@ function renderWikiData(data) {
 }
 
 function renderStateData(data) {
-  const searchResult = data.country_fact_sheets;
+  const searchResult = data.country_fact_sheets.title;
   $('#state-results').append(`
-  <p>${searchResult.title}</p>
+  <p>${searchResult}</p>
   `);
   
   
