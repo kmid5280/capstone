@@ -10,13 +10,13 @@ function renderForm() {
   <button class="js-search-button">Search</button>
   </form>
   `)
-}
+} 
 
 function getDataForYoutube(searchTerm, callback) {
   const query = {
     part: 'snippet',
-    key: 'AIzaSyCN2YnjWyuLox9NPFs4XxhdncA6dIbgGEE',
-    q: `${searchTerm} in:name`,
+    key: 'AIzaSyDDaRbvVVP-AkYsuc2m_88PXDk81aMJWdQ',
+    q: `${searchTerm}+travel`,
   }
   $.getJSON(youtube_API_URL, query, callback);
 } 
@@ -25,10 +25,8 @@ function getDataForYoutube(searchTerm, callback) {
 function getDataForWiki(searchTerm, callback) {
   const query = {
     action: 'query',
-    prop: 'revisions',
-    rvprop: 'content',
+    prop: 'extracts',
     format: 'json',
-    formatversion: 2,
     titles: searchTerm,
   }
   $.ajax({
@@ -38,12 +36,15 @@ function getDataForWiki(searchTerm, callback) {
     jsonp: "callback",
     dataType: "jsonp",
   }).done(callback)
+  
 }
 
 function getDataForState(searchTerm, callback) {
   const query = {
-    get_country_fact_sheets: searchTerm,
+    command: 'get_country_fact_sheets',
+    terms: searchTerm,
     per_page: 1,
+    fields: 'title,content_html',
   }
   $.getJSON(state_API_URL, query, callback)
 }
@@ -81,20 +82,29 @@ function renderYoutubeData(data) {
 }
 
 function renderWikiData(data) {
-  const titleResult = data.query.pages[0];
+  const keys = Object.keys(data.query.pages);
+  const page_html = data.query.pages[keys[0]].extract;
+  console.log(page_html)
   $('#wiki-results').append(`
-    <p>${titleResult.title}</p>
-    `) 
+  ${page_html}
+  `) 
   
 }
 
 function renderStateData(data) {
-  const searchResult = data.country_fact_sheets.title;
-  $('#state-results').append(`
-  <p>${searchResult}</p>
+  if (data.country_fact_sheets) {
+    const title = data.country_fact_sheets[0].title;
+    const content = data.country_fact_sheets[0].content_html;
+    $('#state-results').append(`
+    <p><a href="https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html">https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html</a></p>
+    ${content}
+    `);
+  }
+  else {
+    $('#state-results').append(`
+    <p>No travel advisories exist for this country at this time</p>
   `);
-  
-  
+  }
 }
 
 
