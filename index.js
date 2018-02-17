@@ -5,9 +5,9 @@ const state_API_URL = "https://www.state.gov/api/v1/"
 function renderForm() {
   $('header').html(`
   <form class="js-search-form">
-  <h2>Search</h2>
-  <input type="text" id="form-query" placeholder="Search">
-  <button class="js-search-button">Search</button>
+  <h1 class="pagetitle">Country Search</h1>
+  <input type="text" id="form-query" placeholder="Enter country name">
+  <button class="js-search-button">Submit</button>
   </form>
   `)
 } 
@@ -72,11 +72,13 @@ function renderContentBoxes() {
 
 
 function renderYoutubeData(data) {
-  for (i=0; i<=4; i++) {
+  for (i=0; i<=2; i++) {
     const titleResult = data.items[i];
     $('#youtube-results').append(`
-    <p class="videotitle">${titleResult.snippet.title}</p>
-    <a href="https://www.youtube.com/watch?v=${titleResult.id.videoId}"><img src="${titleResult.snippet.thumbnails.medium.url}" alt="Thumbnail for search result ${i}"></a>
+    <div class='youtube-data'>
+      <a href="https://www.youtube.com/watch?v=${titleResult.id.videoId}"><p class="videotitle">${titleResult.snippet.title}</p></a>
+      <a href="https://www.youtube.com/watch?v=${titleResult.id.videoId}"><img class="youtube-thumbnail" src="${titleResult.snippet.thumbnails.medium.url}" alt="Thumbnail for search result ${i}"></a>
+    </div>
     `)
   } 
 }
@@ -85,19 +87,35 @@ function renderWikiData(data) {
   const keys = Object.keys(data.query.pages);
   const page_html = data.query.pages[keys[0]].extract;
   console.log(page_html)
+  $('#wiki-results').html('')
   $('#wiki-results').append(`
-  ${page_html}
-  `) 
+  <h2 class='wiki-results-title'>Wikipedia Results</h2>
+  `)
+  if (page_html.length > 1) {
+    $('#wiki-results').append(`
+    ${page_html}
+    `)
+  }
+  else {
+    $('#wiki-results').append(`
+    <p>Sorry, no results at this time. Try modifying your search.</p> <!-- For the error handling it would probably be better to have the div render some other useful content instead. -->
+    `)
+  }
   
 }
 
 function renderStateData(data) {
+  $('#state-results').html('')
+  $('#state-results').html(`
+    <h2 class='state-results-title'>State Department Results</h2>
+  `)
   if (data.country_fact_sheets) {
     const title = data.country_fact_sheets[0].title;
     const content = data.country_fact_sheets[0].content_html;
+    
     $('#state-results').append(`
-    <p><a href="https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html">https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html</a></p>
-    ${content}
+      <p><a href="https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html">https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html</a></p>
+      ${content}
     `);
   }
   else {
