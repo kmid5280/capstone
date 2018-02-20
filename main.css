@@ -53,6 +53,10 @@ main {
   font-size: 14px;
 }
 
+#wiki-results, #state-results {
+  padding: 10px;
+}
+
 .youtube-data {
   display: inline-block;
   width: 32%;
@@ -115,7 +119,7 @@ a:link, a:visited {
 
 
   .col-6 {
-    width: 49%;
+    width: 48%;
  }
 
   
