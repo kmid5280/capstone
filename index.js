@@ -178,7 +178,7 @@ function renderForm() {
   <option value="Papua New Guinea">Papua New Guinea</option>
   <option value="Paraguay">Paraguay</option>
   <option value="Peru">Peru</option>
-  <option value="Phillipines">Philippines</option>
+  <option value="Philippines">Philippines</option>
   <option value="Pitcairn Island">Pitcairn Island</option>
   <option value="Poland">Poland</option>
   <option value="Portugal">Portugal</option>
@@ -306,6 +306,20 @@ function watchForSubmit() {
   $('.js-search-button').on('click', event => {
     event.preventDefault();
     const searchQuery = $('#form-query').val();
+    /* $('nav').html(`
+    <div class="navbar">
+      <div class="dropdown">
+        <button class="dropbtn">Jump To: 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#top">Top</a>  
+          <a href="#wikipedia">Wikipedia</a>
+          <a href="#statedepartment">State Department</a>
+        </div>
+      </div> 
+    </div>
+    `)*/
     renderContentBoxes();
     getDataForYoutube(searchQuery, renderYoutubeData)
     getDataForWiki(searchQuery, renderWikiData) 
@@ -324,6 +338,10 @@ function renderContentBoxes() {
 
 
 function renderYoutubeData(data) {
+  $('#youtube-results').html('');
+  $('#youtube-results').html(`
+  <h2 class="youtube-result-title">Youtube Results</h2>
+  `)
   for (i=0; i<=2; i++) {
     const titleResult = data.items[i];
     $('#youtube-results').append(`
@@ -341,7 +359,7 @@ function renderWikiData(data) {
   console.log(page_html)
   $('#wiki-results').html('')
   $('#wiki-results').append(`
-  <h2 class='wiki-results-title'>Wikipedia Results</h2>
+  <a name="wikipedia"><h2 class='wiki-results-title'>Wikipedia Results</h2></a>
   `)
   if (page_html.length > 1) {
     $('#wiki-results').append(`
@@ -359,13 +377,12 @@ function renderWikiData(data) {
 function renderStateData(data) {
   $('#state-results').html('')
   $('#state-results').html(`
-    <h2 class='state-results-title'>State Department Results</h2>
+    <a name="statedepartment"><h2 class='state-results-title'>State Department Results</h2></a>
   `)
   if (data.country_fact_sheets) {
     const title = data.country_fact_sheets[0].title;
     const content = data.country_fact_sheets[0].content_html;
     $('#state-results').append(`
-      <p><a href="https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html">https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/${title}-travel-advisory.html</a></p>
       ${content}
     `);
   }
@@ -377,5 +394,4 @@ function renderStateData(data) {
 }
 
 
-renderForm()
 watchForSubmit()
