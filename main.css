@@ -14,9 +14,9 @@ main {
 
 nav {
   width: 100%;
-  height: 30px;
 }
 
+/* referred to w3schools for help with navbar styling */
 .navbar {
   overflow: hidden;
   background-color: #ff8f0f;
@@ -41,14 +41,13 @@ nav {
 
 /* Dropdown button */
 .dropdown .dropbtn {
-  font-size: 16px; 
   border: none;
   outline: none;
   color: white;
   padding: 14px 16px;
   background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
+  font-family: inherit; 
+  margin: 0; 
 }
 
 /* Add a red background color to navbar links on hover */
@@ -137,9 +136,9 @@ nav {
 }
 
 #youtube-results {
-  width: 66%;
+  width: 55%;
   border-radius: 3px;
-  padding: 20px;
+  padding: 10px 5px 20px;
   background-color: #b7b7b7;
 }
 
@@ -165,7 +164,6 @@ nav {
 
 .youtube-data {
   display: block;
-  /* width: 32%; */
   left: 0;
   right: 0;
   margin: auto;
@@ -185,63 +183,22 @@ a:link, a:visited {
 .youtube-thumbnail {
   margin: auto;
   width: 80%;
-  /* How to get these thumbnails to center correctly under the titles? */
 }
 
-
-/* #youtube-results {
-  left: 0;
-}
-
-#wiki-results {
-  right: 0;
-}
-
-#state-results {
-  left: 0;
-} */
-
-/* .col-3, .col-4, .col-6, .col-12 {
-  float: left;
-
-  padding-left: 1.04166666%;
-  padding-right: 1.04166666%;
-} */
-
-/* .col-3, .col-4, .col-6, .col-12 {
-  width: 100%;
-}
-
-
-
-@media only screen and (min-width: 640px) {
-  
-  .col-3 {
-    width: 25%;
-  }
-
- 
-  .col-4 {
-    width: 33.33%;
-  }
-
-
-  .col-6 {
-    width: 48%;
- }
-
-  
-  .col-12 {
-    width: 100%;
-  }
-} */
-
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 620px) {
   nav {
     top: 0;
     left: 0;
-    width: 12%;
     height: 20px;
+    width: 15%;
     position: fixed;
+  }
+
+  .navbar {
+    background-color: transparent;
+  }
+
+  .dropdown {
+    background-color: #ff8f0f;
   }
 }
