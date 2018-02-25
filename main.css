@@ -13,14 +13,16 @@ main {
 }
 
 nav {
-  width: 100%;
+  left: 0;
+  top: 0;
+  width: 15%;
+  position: fixed;
 }
 
 /* referred to w3schools for help with navbar styling */
 .navbar {
   overflow: hidden;
-  background-color: #ff8f0f;
-  font-family: 'Titillium Web', sans-serif;
+  background-color: transparent;
 }
 
 /* Links inside the navbar */
@@ -37,6 +39,12 @@ nav {
 .dropdown {
   float: left;
   overflow: hidden;
+  background-color: #ff8f0f;
+}
+
+.dropbtn {
+  width: 60px;
+  height: 60px;
 }
 
 /* Dropdown button */
@@ -190,7 +198,7 @@ a:link, a:visited {
     top: 0;
     left: 0;
     height: 20px;
-    width: 15%;
+    width: 20%;
     position: fixed;
   }
 
