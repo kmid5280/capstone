@@ -5,7 +5,7 @@ const state_API_URL = "https://www.state.gov/api/v1/"
 function getDataForYoutube(searchTerm, callback) {
   const query = {
     part: 'snippet',
-    key: 'AIzaSyDDaRbvVVP-AkYsuc2m_88PXDk81aMJWdQ',
+    //key: '',
     q: `${searchTerm}+facts`,
   }
   $.getJSON(youtube_API_URL, query, callback);
