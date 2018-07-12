@@ -5,7 +5,7 @@ const state_API_URL = "https://www.state.gov/api/v1/"
 function getDataForYoutube(searchTerm, callback) {
   const query = {
     part: 'snippet',
-    //key: '',
+    key: '',
     q: `${searchTerm}+facts`,
   }
   $.getJSON(youtube_API_URL, query, callback);
@@ -32,7 +32,6 @@ function getDataForWiki(searchTerm, callback) {
 
 function getDataForState(searchTerm, callback) {
   stateSearch = searchTerm.replace(" ", "-").toLowerCase()
-  console.log(stateSearch)
   const query = {
     command: 'get_country_fact_sheets',
     terms: searchTerm,
