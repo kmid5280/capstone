@@ -1,14 +1,11 @@
 const wiki_API_URL = "https://en.wikipedia.org/w/api.php"
-const youtube_API_URL = "https://www.googleapis.com/youtube/v3/search"
 const state_API_URL = "https://www.state.gov/api/v1/"
+const server_URL = "https://stark-hamlet-33607.herokuapp.com/countrysearch"
+
 
 function getDataForYoutube(searchTerm, callback) {
-  const query = {
-    part: 'snippet',
-    key: '',
-    q: `${searchTerm}+facts`,
-  }
-  $.getJSON(youtube_API_URL, query, callback);
+  const query = searchTerm
+  $.getJSON(server_URL, query, callback)
 } 
 
 
@@ -81,7 +78,6 @@ function renderYoutubeData(data) {
 function renderWikiData(data) {
   const keys = Object.keys(data.query.pages);
   const page_html = data.query.pages[keys[0]].extract;
-  console.log(page_html)
   $('#wiki-results').html('')
   $('#wiki-results').append(`
   <a name="wikipedia"><h2 class='wiki-results-title'>Wikipedia Results</h2></a>
