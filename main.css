@@ -258,4 +258,8 @@ a:link, a:visited {
   .read-more-button {
     width: 80%;
   }
+
+  #youtube-results, #wiki-results {
+    width: 90%;
+  }
 }
