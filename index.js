@@ -45,7 +45,7 @@ function watchForSubmit() {
     event.preventDefault();
     const searchQuery = $('#form-query').val();
     renderContentBoxes();
-    //getDataForYoutube(searchQuery, renderYoutubeData)
+    getDataForYoutube(searchQuery, renderYoutubeData)
     getDataForWiki(searchQuery, renderWikiData) 
     //getDataForState(searchQuery, renderStateData)
   })
