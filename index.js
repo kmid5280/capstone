@@ -1,5 +1,6 @@
 const wiki_API_URL = "https://en.wikipedia.org/w/api.php"
-const state_API_URL = "https://www.state.gov/api/v1/"
+// State Department API disabled, may no longer be available in current form
+// const state_API_URL = "https://history.state.gov/api/v1/catalog/search"
 const server_URL = "https://stark-hamlet-33607.herokuapp.com/countrysearch"
 
 var $el, $ps, $up, totalHeight;
@@ -46,7 +47,7 @@ function watchForSubmit() {
     renderContentBoxes();
     //getDataForYoutube(searchQuery, renderYoutubeData)
     getDataForWiki(searchQuery, renderWikiData) 
-    getDataForState(searchQuery, renderStateData)
+    //getDataForState(searchQuery, renderStateData)
   })
 }
 
@@ -55,7 +56,7 @@ function renderContentBoxes() {
   $('main').html(`
     <div id="youtube-results" class="results"></div>
     <div id="wiki-results" class="results"></div>
-    <div id="state-results" class="results"></div>
+    <!-- <div id="state-results" class="results"></div> -->
     `)
 }
 
