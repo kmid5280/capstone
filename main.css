@@ -131,6 +131,47 @@ nav {
   text-align: center;
 }
 
+.wiki-contents-wrapper, .state-contents-wrapper {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: block;
+}
+
+.wiki-contents-wrapper, .wiki-read-more, .state.contents-wrapper, .state-read-more {
+  margin: 0; 
+  padding: 10px 0;
+  width: auto;
+}
+
+.wiki-read-more, .state-read-more {
+  text-align: center;
+  padding: 30px 0;
+  bottom: 10;
+}
+
+.read-more-button {
+  bottom: 0;
+  position: absolute;
+  display: block;
+  text-decoration: none;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 50%;
+  height: auto;
+  background-color: #224222;
+  color: white;
+  border-radius: 3px;
+  font-size: 20px;
+  font-family: 'Fjalla One', sans-serif;
+  outline: 0;
+  padding: 5px 5px;
+}
+
 .results {
   display: block;
   margin: auto;

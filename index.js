@@ -2,6 +2,7 @@ const wiki_API_URL = "https://en.wikipedia.org/w/api.php"
 const state_API_URL = "https://www.state.gov/api/v1/"
 const server_URL = "https://stark-hamlet-33607.herokuapp.com/countrysearch"
 
+var $el, $ps, $up, totalHeight;
 
 function getDataForYoutube(searchTerm, callback) {
   const query = searchTerm
@@ -43,7 +44,7 @@ function watchForSubmit() {
     event.preventDefault();
     const searchQuery = $('#form-query').val();
     renderContentBoxes();
-    getDataForYoutube(searchQuery, renderYoutubeData)
+    //getDataForYoutube(searchQuery, renderYoutubeData)
     getDataForWiki(searchQuery, renderWikiData) 
     getDataForState(searchQuery, renderStateData)
   })
@@ -84,7 +85,10 @@ function renderWikiData(data) {
   `)
   if (page_html.length > 1) {
     $('#wiki-results').append(`
-    ${page_html}
+    <div class="wiki-contents-wrapper">
+      ${page_html}
+      <p class="wiki-read-more"><a href="#" class="read-more-button">Read More</a></p>
+    </div>
     `)
   }
   else {
@@ -92,6 +96,34 @@ function renderWikiData(data) {
     <p>Sorry, no results at this time. Try modifying your search.</p>
     `)
   }
+
+  $(".wiki-contents-wrapper .read-more-button").click(function() {
+      
+    totalHeight = 0
+  
+    $el = $(this);
+    $p  = $el.parent();
+    $up = $p.parent();
+    $ps = $up.find("p:not('.wiki-read-more')");
+    
+    $ps.each(function() {
+      totalHeight += $(this).outerHeight();
+    });
+          
+    $up
+      .css({
+        "height": $up.height(),
+        "max-height": 'none'
+      })
+      .animate({
+        "height": totalHeight
+      });
+    
+    $p.fadeOut();
+    
+    return false;
+      
+  });
   
 }
 
@@ -104,7 +136,10 @@ function renderStateData(data) {
     const title = data.country_fact_sheets[0].title;
     const content = data.country_fact_sheets[0].content_html;
     $('#state-results').append(`
-      ${content}
+      <div class="state-contents-wrapper">
+        ${content}
+        
+      </div>
     `);
   }
   else {
@@ -112,7 +147,38 @@ function renderStateData(data) {
     <p>No travel advisories exist for this country at this time.</p>
   `);
   }
+
+  $(".state-contents-wrapper .read-more-button").click(function() {
+      
+    totalHeight = 0
+  
+    $el = $(this);
+    $p  = $el.parent();
+    $up = $p.parent();
+    $ps = $up.find("p:not('.read-more')");
+    
+    $ps.each(function() {
+      totalHeight += $(this).outerHeight();
+    });
+          
+    $up
+      .css({
+        "height": $up.height(),
+        "max-height": 'none'
+      })
+      .animate({
+        "height": totalHeight
+      });
+    
+    $p.fadeOut();
+    
+    return false;
+      
+  });
+  
 }
+
+
 
 
 watchForSubmit()
