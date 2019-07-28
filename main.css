@@ -254,4 +254,8 @@ a:link, a:visited {
   .dropdown {
     background-color: #ff8f0f;
   }
+
+  .read-more-button {
+    width: 80%;
+  }
 }
